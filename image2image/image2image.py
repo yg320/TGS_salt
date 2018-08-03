@@ -141,7 +141,7 @@ def split_input(img):
 def get_data():
     datadir = args.data
     imgs = glob.glob(os.path.join(datadir, '*.png'))
-    ds = ImageFromFile(imgs, channel=3, shuffle=True)
+    ds = ImageFromFile(imgs, channel=IN_CH, shuffle=True)
 
     ds = MapData(ds, lambda dp: split_input(dp[0]))
     # augs = [imgaug.Resize(286), imgaug.RandomCrop(256)]
@@ -159,9 +159,9 @@ def sample(datadir, model_path):
         output_names=['viz'])
 
     imgs = glob.glob(os.path.join(datadir, '*.png'))
-    ds = ImageFromFile(imgs, channel=3, shuffle=True)
+    ds = ImageFromFile(imgs, channel=IN_CH, shuffle=True)
     ds = MapData(ds, lambda dp: split_input(dp[0]))
-    ds = AugmentImageComponents(ds, [imgaug.Resize(256)], (0, 1))
+    # ds = AugmentImageComponents(ds, [imgaug.Resize(256)], (0, 1))
     ds = BatchData(ds, 6)
 
     pred = SimpleDatasetPredictor(pred, ds)

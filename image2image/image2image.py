@@ -15,7 +15,7 @@ from tensorpack import *
 from tensorpack.utils.viz import stack_patches
 from tensorpack.tfutils.summary import add_moving_summary
 from tensorpack.tfutils.scope_utils import auto_reuse_variable_scope
-from GAN import GANTrainer, GANModelDesc
+from tensorpack import ModelDesc, SimpleTrainer
 
 """
 To train Image-to-Image translation model with image pairs:
@@ -55,13 +55,13 @@ def visualize_tensors(name, imgs, scale_func=lambda x: (x + 1.) * 128., max_outp
     tf.summary.image(name, xy, max_outputs=30)
 
 
-class Model(GANModelDesc):
+class Model(ModelDesc):
     def inputs(self):
         SHAPE = 256
         return [tf.placeholder(tf.float32, (None, SHAPE, SHAPE, IN_CH), 'input'),
                 tf.placeholder(tf.float32, (None, SHAPE, SHAPE, OUT_CH), 'output')]
 
-    def generator(self, imgs):
+    def image2image(self, imgs):
         # imgs: input: 256x256xch
         # U-Net structure, it's slightly different from the original on the location of relu/lrelu
         with argscope(BatchNorm, training=True), \
@@ -97,33 +97,15 @@ class Model(GANModelDesc):
                         .ConcatWith(e1, 3)
                         .Conv2DTranspose('deconv8', OUT_CH, activation=tf.tanh)())
 
-    @auto_reuse_variable_scope
-    def discriminator(self, inputs, outputs):
-        """ return a (b, 1) logits"""
-        l = tf.concat([inputs, outputs], 3)
-        with argscope(Conv2D, kernel_size=4, strides=2, activation=BNLReLU):
-            l = (LinearWrap(l)
-                 .Conv2D('conv0', NF, activation=tf.nn.leaky_relu)
-                 .Conv2D('conv1', NF * 2)
-                 .Conv2D('conv2', NF * 4)
-                 .Conv2D('conv3', NF * 8, strides=1, padding='VALID')
-                 .Conv2D('convlast', 1, strides=1, padding='VALID', activation=tf.identity)())
-        return l
-
     def build_graph(self, input, output):
         input, output = input / 128.0 - 1, output / 128.0 - 1
 
         with argscope([Conv2D, Conv2DTranspose], kernel_initializer=tf.truncated_normal_initializer(stddev=0.02)):
-            with tf.variable_scope('gen'):
-                fake_output = self.generator(input)
-            with tf.variable_scope('discrim'):
-                real_pred = self.discriminator(input, output)
-                fake_pred = self.discriminator(input, fake_output)
+            fake_output = self.generator(input)
 
-        self.build_losses(real_pred, fake_pred)
         errL1 = tf.reduce_mean(tf.abs(fake_output - output), name='L1_loss')
-        self.g_loss = tf.add(self.g_loss, LAMBDA * errL1, name='total_g_loss')
-        add_moving_summary(errL1, self.g_loss)
+
+        add_moving_summary(errL1)
 
         # tensorboard visualization
         if IN_CH == 1:
@@ -134,7 +116,7 @@ class Model(GANModelDesc):
 
         visualize_tensors('input,output,fake', [input, output, fake_output], max_outputs=max(30, BATCH))
 
-        self.collect_variables()
+        self.cost = errL1
 
     def optimizer(self):
         lr = tf.get_variable('learning_rate', initializer=2e-4, trainable=False)
@@ -214,7 +196,7 @@ if __name__ == '__main__':
 
         data = QueueInput(get_data())
 
-        GANTrainer(data, Model()).train_with_defaults(
+        SimpleTrainer(data, Model()).train_with_defaults(
             callbacks=[
                 PeriodicTrigger(ModelSaver(), every_k_epochs=3),
                 ScheduledHyperParamSetter('learning_rate', [(200, 1e-4)])

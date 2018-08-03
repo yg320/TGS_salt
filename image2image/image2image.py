@@ -29,10 +29,10 @@ To visualize on test set:
 """
 
 BATCH = 1
-IN_CH = 3
-OUT_CH = 3
+IN_CH = 1
+OUT_CH = 1
 LAMBDA = 100
-NF = 64  # number of filter
+NF = 16  # number of filter
 
 
 def BNLReLU(x, name=None):
@@ -57,7 +57,7 @@ def visualize_tensors(name, imgs, scale_func=lambda x: (x + 1.) * 128., max_outp
 
 class Model(ModelDesc):
     def inputs(self):
-        SHAPE = 256
+        SHAPE = 128
         return [tf.placeholder(tf.float32, (None, SHAPE, SHAPE, IN_CH), 'input'),
                 tf.placeholder(tf.float32, (None, SHAPE, SHAPE, OUT_CH), 'output')]
 
@@ -71,23 +71,20 @@ class Model(ModelDesc):
                 e1 = Conv2D('conv1', imgs, NF, activation=tf.nn.leaky_relu)
                 e2 = Conv2D('conv2', e1, NF * 2)
                 e3 = Conv2D('conv3', e2, NF * 4)
-                e4 = Conv2D('conv4', e3, NF * 8)
-                e5 = Conv2D('conv5', e4, NF * 8)
-                e6 = Conv2D('conv6', e5, NF * 8)
-                e7 = Conv2D('conv7', e6, NF * 8)
-                e8 = Conv2D('conv8', e7, NF * 8, activation=BNReLU)  # 1x1
+                e4 = Conv2D('conv5', e3, NF * 8)
+                e5 = Conv2D('conv6', e4, NF * 8)
+                e6 = Conv2D('conv7', e5, NF * 8)
+                e7 = Conv2D('conv8', e6, NF * 8, activation=BNReLU)  # 1x1
             with argscope(Conv2DTranspose, activation=BNReLU, kernel_size=4, strides=2):
-                return (LinearWrap(e8)
+                return (LinearWrap(e7)
                         .Conv2DTranspose('deconv1', NF * 8)
                         .Dropout()
-                        .ConcatWith(e7, 3)
+                        .ConcatWith(e6, 3)
                         .Conv2DTranspose('deconv2', NF * 8)
                         .Dropout()
-                        .ConcatWith(e6, 3)
+                        .ConcatWith(e5, 3)
                         .Conv2DTranspose('deconv3', NF * 8)
                         .Dropout()
-                        .ConcatWith(e5, 3)
-                        .Conv2DTranspose('deconv4', NF * 8)
                         .ConcatWith(e4, 3)
                         .Conv2DTranspose('deconv5', NF * 4)
                         .ConcatWith(e3, 3)
@@ -101,7 +98,7 @@ class Model(ModelDesc):
         input, output = input / 128.0 - 1, output / 128.0 - 1
 
         with argscope([Conv2D, Conv2DTranspose], kernel_initializer=tf.truncated_normal_initializer(stddev=0.02)):
-            fake_output = self.generator(input)
+            fake_output = self.image2image(input)
 
         errL1 = tf.reduce_mean(tf.abs(fake_output - output), name='L1_loss')
 
@@ -143,12 +140,12 @@ def split_input(img):
 
 def get_data():
     datadir = args.data
-    imgs = glob.glob(os.path.join(datadir, '*.jpg'))
+    imgs = glob.glob(os.path.join(datadir, '*.png'))
     ds = ImageFromFile(imgs, channel=3, shuffle=True)
 
     ds = MapData(ds, lambda dp: split_input(dp[0]))
-    augs = [imgaug.Resize(286), imgaug.RandomCrop(256)]
-    ds = AugmentImageComponents(ds, augs, (0, 1))
+    # augs = [imgaug.Resize(286), imgaug.RandomCrop(256)]
+    # ds = AugmentImageComponents(ds, augs, (0, 1))
     ds = BatchData(ds, BATCH)
     ds = PrefetchData(ds, 100, 1)
     return ds
@@ -161,7 +158,7 @@ def sample(datadir, model_path):
         input_names=['input', 'output'],
         output_names=['viz'])
 
-    imgs = glob.glob(os.path.join(datadir, '*.jpg'))
+    imgs = glob.glob(os.path.join(datadir, '*.png'))
     ds = ImageFromFile(imgs, channel=3, shuffle=True)
     ds = MapData(ds, lambda dp: split_input(dp[0]))
     ds = AugmentImageComponents(ds, [imgaug.Resize(256)], (0, 1))
@@ -196,7 +193,9 @@ if __name__ == '__main__':
 
         data = QueueInput(get_data())
 
-        SimpleTrainer(data, Model()).train_with_defaults(
+        config = TrainConfig(
+            model=Model(),
+            data=data,
             callbacks=[
                 PeriodicTrigger(ModelSaver(), every_k_epochs=3),
                 ScheduledHyperParamSetter('learning_rate', [(200, 1e-4)])
@@ -205,3 +204,14 @@ if __name__ == '__main__':
             max_epoch=300,
             session_init=SaverRestore(args.load) if args.load else None
         )
+
+        launch_train_with_config(config, SimpleTrainer())
+        # SimpleTrainer(data, Model()).train_with_defaults(
+        #     callbacks=[
+        #         PeriodicTrigger(ModelSaver(), every_k_epochs=3),
+        #         ScheduledHyperParamSetter('learning_rate', [(200, 1e-4)])
+        #     ],
+        #     steps_per_epoch=data.size(),
+        #     max_epoch=300,
+        #     session_init=SaverRestore(args.load) if args.load else None
+        # )

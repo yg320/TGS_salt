@@ -1,0 +1,1 @@
+/anaconda3/envs/kaggle_salt/bin/python3.6 /Users/yakirgorski/PycharmProjects/TGS_salt/image2image/image2image.py --data /Users/yakirgorski/Documents/projects/TGS_salt/Data/processed/train

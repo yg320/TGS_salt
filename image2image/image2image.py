@@ -131,10 +131,13 @@ def split_input(img):
     input, output = img[:, :s, :], img[:, s:, :]
     if args.mode == 'BtoA':
         input, output = output, input
-    if IN_CH == 1:
-        input = cv2.cvtColor(input, cv2.COLOR_RGB2GRAY)[:, :, np.newaxis]
-    if OUT_CH == 1:
-        output = cv2.cvtColor(output, cv2.COLOR_RGB2GRAY)[:, :, np.newaxis]
+
+    if False:
+        # TODO: Verify
+        if IN_CH == 1:
+            input = cv2.cvtColor(input, cv2.COLOR_RGB2GRAY)[:, :, np.newaxis]
+        if OUT_CH == 1:
+            output = cv2.cvtColor(output, cv2.COLOR_RGB2GRAY)[:, :, np.newaxis]
     return [input, output]
 
 
@@ -151,7 +154,7 @@ def get_data():
     return ds
 
 
-def sample(datadir, model_path):
+def sample(datadir, model_path, output_path):
     pred = PredictConfig(
         session_init=get_model_loader(model_path),
         model=Model(),
@@ -165,15 +168,22 @@ def sample(datadir, model_path):
     ds = BatchData(ds, 6)
 
     pred = SimpleDatasetPredictor(pred, ds)
+
+    counter = 0
     for o in pred.get_result():
-        o = o[0][:, :, :, ::-1]
-        stack_patches(o, nr_row=3, nr_col=2, viz=True)
+        for im in o[0]:
+            np.save(os.path.join(output_path, f'{counter}.npy'), im[:,:,0])
+            counter += 1
+        # o = o[0][:, :, :, ::-1]
+        # stack_patches(o, nr_row=3, nr_col=2, viz=True)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--gpu', help='comma separated list of GPU(s) to use.')
     parser.add_argument('--load', help='load model')
+    parser.add_argument('--logger', help='logger_dir')
+    parser.add_argument('--output_path', help='output_path for sampling')
     parser.add_argument('--sample', action='store_true', help='run sampling')
     parser.add_argument('--data', help='Image directory', required=True)
     parser.add_argument('--mode', choices=['AtoB', 'BtoA'], default='AtoB')
@@ -187,9 +197,10 @@ if __name__ == '__main__':
 
     if args.sample:
         assert args.load
-        sample(args.data, args.load)
+        assert args.output_path
+        sample(args.data, args.load, args.output_path)
     else:
-        logger.auto_set_dir()
+        logger.set_logger_dir(args.logger, action='k')
 
         data = QueueInput(get_data())
 

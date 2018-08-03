@@ -1,1 +1,3 @@
-/anaconda3/envs/kaggle_salt/bin/python3.6 /Users/yakirgorski/PycharmProjects/TGS_salt/image2image/image2image.py --data /Users/yakirgorski/Documents/projects/TGS_salt/Data/processed/train
+/anaconda3/envs/kaggle_salt/bin/python3.6 /Users/yakirgorski/PycharmProjects/TGS_salt/image2image/image2image.py --data /Users/yakirgorski/Documents/projects/TGS_salt/Data/processed/train --logger /Users/yakirgorski/Documents/projects/TGS_salt/Experiments/1
+
+/anaconda3/envs/kaggle_salt/bin/python3.6 /Users/yakirgorski/PycharmProjects/TGS_salt/image2image/image2image.py --sample --data /Users/yakirgorski/Documents/projects/TGS_salt/Data/processed/validation --load /Users/yakirgorski/Documents/projects/TGS_salt/Experiments/1/model-48000.data-00000-of-00001 --output_path /Users/yakirgorski/Documents/projects/TGS_salt/Experiments/sample

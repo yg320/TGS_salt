@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5baf9acf-f391-4099-9021-50b78ad291ef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/image2image/evaluate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image2image/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2image/evaluate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/image2image/exp_execute.sh" beforeDir="false" afterPath="$PROJECT_DIR$/image2image/exp_execute.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/image2image/image2image.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2image/image2image.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image2image/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2image/preprocessing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,27 +23,27 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="11" />
+          <entry key="py" value="20" />
           <entry key="sh" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="11" />
+          <entry key="Python" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="168" />
-          <entry key="py" value="3107" />
-          <entry key="sh" value="53" />
+          <entry key="Python Console" value="458" />
+          <entry key="py" value="5231" />
+          <entry key="sh" value="164" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="53" />
-          <entry key="Python" value="3275" />
+          <entry key="PLAIN_TEXT" value="164" />
+          <entry key="Python" value="5689" />
         </counts>
       </usages-collector>
     </session>
@@ -53,38 +53,57 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/image2image/image2image.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="199" column="31" lean-forward="true" selection-start-line="199" selection-start-column="31" selection-end-line="199" selection-end-column="31" />
+            <state relative-caret-position="244">
+              <caret line="94" column="82" lean-forward="true" selection-start-line="94" selection-start-column="82" selection-end-line="94" selection-end-column="96" />
               <folding>
                 <element signature="e#89#99#0" expanded="true" />
+                <element signature="e#4512#4910#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/dataflow/image.py">
+        <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/callbacks/saver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="79" column="16" lean-forward="true" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="41" />
+            <state relative-caret-position="120">
+              <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+              <folding>
+                <element signature="n#!!doc" />
+                <element signature="e#246#3124#0" />
+                <element signature="e#246#292#1" />
+                <element signature="e#498#1479#0" />
+                <element signature="e#498#949#1" />
+                <element signature="e#1340#1434#0" />
+                <element signature="e#1517#2214#0" />
+                <element signature="e#2253#2554#0" />
+                <element signature="e#2588#3124#0" />
+                <element signature="e#2605#2907#0" />
+                <element signature="e#2924#3023#0" />
+                <element signature="e#3157#5723#0" />
+                <element signature="e#3157#3237#1" />
+                <element signature="e#3335#4426#0" />
+                <element signature="e#3335#4154#1" />
+                <element signature="e#4461#4596#0" />
+                <element signature="e#4632#4757#0" />
+                <element signature="e#4791#4926#0" />
+                <element signature="e#4845#4926#0" />
+                <element signature="e#4957#5723#0" />
+                <element signature="e#5052#5155#0" />
+                <element signature="e#5756#6234#0" />
+                <element signature="e#5756#5836#1" />
+                <element signature="e#5919#6234#0" />
+                <element signature="e#5919#6125#1" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/utils/logger.py">
+        <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/callbacks/inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="76" column="18" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/utils/viz.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-196">
-              <caret line="169" column="4" selection-start-line="169" selection-start-column="4" selection-end-line="169" selection-end-column="4" />
+            <state relative-caret-position="-589">
+              <caret line="93" column="28" lean-forward="true" selection-start-line="93" selection-start-column="28" selection-end-line="93" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -92,151 +111,59 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/tfutils/sessinit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="96" column="33" selection-start-line="96" selection-start-column="23" selection-end-line="96" selection-end-column="33" />
+            <state relative-caret-position="229">
+              <caret line="96" column="8" selection-start-line="96" selection-start-column="8" selection-end-line="96" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/train/config.py">
+        <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/predict/dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="97" selection-start-line="97" selection-end-line="98" selection-end-column="43" />
+            <state relative-caret-position="236">
+              <caret line="62" column="8" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/train/trainers.py">
+        <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/tfutils/summary.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-67">
-              <caret line="60" column="59" lean-forward="true" selection-start-line="60" selection-start-column="59" selection-end-line="60" selection-end-column="59" />
+            <state relative-caret-position="372">
+              <caret line="239" column="16" lean-forward="true" selection-start-line="239" selection-start-column="16" selection-end-line="239" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorflow/python/ops/nn_ops.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="236">
+              <caret line="1780" column="4" selection-start-line="1780" selection-start-column="4" selection-end-line="1780" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/image2image/preprocessing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="45" column="35" lean-forward="true" selection-start-line="45" selection-start-column="35" selection-end-line="45" selection-end-column="35" />
               <folding>
-                <element signature="n#!!doc" />
-                <element signature="e#854#1185#0" />
-                <element signature="e#1214#1336#0" />
-                <element signature="e#1245#1323#0" />
-                <element signature="e#1383#1805#0" />
-                <element signature="e#1383#1443#1" />
-                <element signature="e#1512#1805#0" />
-                <element signature="e#1622#1787#0" />
-                <element signature="e#2169#3126#0" />
-                <element signature="e#2246#2278#1" />
-                <element signature="e#2367#2829#0" />
-                <element signature="e#2367#2569#1" />
-                <element signature="e#2899#3126#0" />
-                <element signature="e#3164#3431#0" />
-                <element signature="e#3164#3362#1" />
-                <element signature="e#3486#4280#0" />
-                <element signature="e#3549#3581#1" />
-                <element signature="e#3675#3983#0" />
-                <element signature="e#3675#3835#1" />
-                <element signature="e#4053#4280#0" />
-                <element signature="e#4344#5849#0" />
-                <element signature="e#4416#4448#1" />
-                <element signature="e#4561#5425#0" />
-                <element signature="e#4561#4970#1" />
-                <element signature="e#5045#5170#0" />
-                <element signature="e#5495#5849#0" />
-                <element signature="e#5906#7109#0" />
-                <element signature="e#5968#6213#0" />
-                <element signature="e#6243#6573#0" />
-                <element signature="e#6654#7109#0" />
-                <element signature="e#6779#6981#0" />
-                <element signature="e#6813#6980#0" />
-                <element signature="e#7182#8175#0" />
-                <element signature="e#7336#7916#0" />
-                <element signature="e#7336#7580#1" />
-                <element signature="e#7986#8175#0" />
-                <element signature="e#8243#10355#0" />
-                <element signature="e#8370#8826#0" />
-                <element signature="e#8370#8516#1" />
-                <element signature="e#8884#9305#0" />
-                <element signature="e#8931#9305#0" />
-                <element signature="e#8987#9042#0" />
-                <element signature="e#9375#10281#0" />
-                <element signature="e#9922#10256#0" />
-                <element signature="e#10056#10222#0" />
-                <element signature="e#10340#10355#0" />
-                <element signature="e#10403#15482#0" />
-                <element signature="e#10403#13153#1" />
-                <element signature="e#13200#13576#0" />
-                <element signature="e#13200#13315#1" />
-                <element signature="e#13618#14160#0" />
-                <element signature="e#13848#14126#0" />
-                <element signature="e#13888#14126#0" />
-                <element signature="e#13929#14045#0" />
-                <element signature="e#14230#14698#0" />
-                <element signature="e#14270#14478#0" />
-                <element signature="e#14779#15482#0" />
-                <element signature="e#14846#14951#0" />
-                <element signature="e#14960#15039#0" />
-                <element signature="e#15764#15943#0" />
+                <element signature="e#0#11#0" expanded="true" />
+                <marker date="1533368887271" expanded="true" signature="661:684" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/train/base.py">
+        <entry file="file://$PROJECT_DIR$/image2image/evaluate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="284" selection-start-line="284" selection-end-line="284" />
+            <state relative-caret-position="275">
+              <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="101" />
               <folding>
-                <element signature="n#!!doc" />
-                <element signature="e#772#834#0" />
-                <element signature="e#772#825#1" />
-                <element signature="e#866#2710#0" />
-                <element signature="e#866#909#1" />
-                <element signature="e#943#1022#0" />
-                <element signature="e#1098#1411#0" />
-                <element signature="e#1098#1160#1" />
-                <element signature="e#1455#1637#0" />
-                <element signature="e#1455#1585#1" />
-                <element signature="e#1686#2056#0" />
-                <element signature="e#1686#2025#1" />
-                <element signature="e#2107#2544#0" />
-                <element signature="e#2107#2511#1" />
-                <element signature="e#2594#2710#0" />
-                <element signature="e#2594#2678#1" />
-                <element signature="e#2803#2940#1" />
-                <element signature="e#3074#3862#0" />
-                <element signature="e#3074#3329#1" />
-                <element signature="e#3384#3458#0" />
-                <element signature="e#3694#3785#0" />
-                <element signature="e#3812#3862#0" />
-                <element signature="e#3940#4447#0" />
-                <element signature="e#3940#4195#1" />
-                <element signature="e#4250#4403#0" />
-                <element signature="e#4293#4402#0" />
-                <element signature="e#4529#5634#0" />
-                <element signature="e#4529#4721#1" />
-                <element signature="e#5207#5282#0" />
-                <element signature="e#5721#6650#0" />
-                <element signature="e#5721#5956#1" />
-                <element signature="e#6319#6408#0" />
-                <element signature="e#6435#6574#0" />
-                <element signature="e#6712#7142#0" />
-                <element signature="e#6712#6971#1" />
-                <element signature="e#7241#9178#0" />
-                <element signature="e#7241#7369#1" />
-                <element signature="e#7419#9178#0" />
-                <element signature="e#7556#8789#0" />
-                <element signature="e#7603#7668#0" />
-                <element signature="e#7910#8735#0" />
-                <element signature="e#8175#8366#0" />
-                <element signature="e#8995#9070#0" />
-                <element signature="e#9108#9178#0" />
-                <element signature="e#9357#9890#0" />
-                <element signature="e#9357#9718#1" />
-                <element signature="e#10165#10500#1" />
-                <element signature="e#11226#11619#0" />
-                <element signature="e#11335#11553#0" />
-                <element signature="e#11651#11948#0" />
-                <element signature="e#11651#11697#1" />
-                <element signature="e#11822#11933#0" />
-                <element signature="e#11963#12068#0" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -245,21 +172,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/image2image/exp_execute.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="381" selection-start-line="2" selection-start-column="381" selection-end-line="2" selection-end-column="381" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/image2image/evaluate.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" lean-forward="true" selection-end-line="44" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <marker date="1533301899715" expanded="true" signature="108:952" ph="..." />
-              </folding>
+            <state relative-caret-position="282">
+              <caret line="29" selection-start-line="29" selection-end-line="29" selection-end-column="286" />
             </state>
           </provider>
         </entry>
@@ -270,10 +184,12 @@
     <findStrings>
       <find>gan</find>
       <find>jpg</find>
-      <find>ImageFromFile</find>
       <find>256</find>
       <find>fromFile</find>
+      <find>ImageFromFile</find>
       <find>vis</find>
+      <find>pickle</find>
+      <find>batch</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -289,10 +205,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="2097" />
+    <option name="y" value="48" />
     <option name="width" value="1920" />
-    <option name="height" value="979" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -334,7 +251,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.image2image">
+  <component name="RunManager" selected="Python.preprocessing">
     <configuration name="image2image" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="TGS_salt" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -383,8 +300,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.image2image" />
         <item itemvalue="Python.preprocessing" />
+        <item itemvalue="Python.image2image" />
       </list>
     </recent_temporary>
   </component>
@@ -402,15 +319,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="979" extended-state="6" />
+    <frame x="2097" y="48" width="1920" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1864139" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10005266" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Python Console" visible="true" weight="0.32919955" />
-      <window_info anchor="bottom" id="Terminal" />
+      <window_info active="true" anchor="bottom" id="Python Console" visible="true" weight="0.37202072" />
+      <window_info anchor="bottom" id="Terminal" weight="0.32919955" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -428,16 +345,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/image2image/preprocessing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="30" column="44" lean-forward="true" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/train/tower.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
@@ -550,13 +457,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/tfutils/sessinit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="96" column="33" selection-start-line="96" selection-start-column="23" selection-end-line="96" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/utils/viz.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-196">
@@ -633,37 +533,124 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/dataflow/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="262" column="8" selection-start-line="262" selection-start-column="8" selection-end-line="262" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/dataflow/image.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="79" column="16" lean-forward="true" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="41" />
+        <state relative-caret-position="-809">
+          <caret line="59" column="27" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorflow/python/ops/nn_ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="1780" column="4" selection-start-line="1780" selection-start-column="4" selection-end-line="1780" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/tfutils/summary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="239" column="16" lean-forward="true" selection-start-line="239" selection-start-column="16" selection-end-line="239" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/predict/dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="62" column="8" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/tfutils/sessinit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="96" column="8" selection-start-line="96" selection-start-column="8" selection-end-line="96" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/callbacks/saver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!doc" />
+            <element signature="e#246#3124#0" />
+            <element signature="e#246#292#1" />
+            <element signature="e#498#1479#0" />
+            <element signature="e#498#949#1" />
+            <element signature="e#1340#1434#0" />
+            <element signature="e#1517#2214#0" />
+            <element signature="e#2253#2554#0" />
+            <element signature="e#2588#3124#0" />
+            <element signature="e#2605#2907#0" />
+            <element signature="e#2924#3023#0" />
+            <element signature="e#3157#5723#0" />
+            <element signature="e#3157#3237#1" />
+            <element signature="e#3335#4426#0" />
+            <element signature="e#3335#4154#1" />
+            <element signature="e#4461#4596#0" />
+            <element signature="e#4632#4757#0" />
+            <element signature="e#4791#4926#0" />
+            <element signature="e#4845#4926#0" />
+            <element signature="e#4957#5723#0" />
+            <element signature="e#5052#5155#0" />
+            <element signature="e#5756#6234#0" />
+            <element signature="e#5756#5836#1" />
+            <element signature="e#5919#6234#0" />
+            <element signature="e#5919#6125#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/kaggle_salt/lib/python3.6/site-packages/tensorpack/callbacks/inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-589">
+          <caret line="93" column="28" lean-forward="true" selection-start-line="93" selection-start-column="28" selection-end-line="93" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/image2image/evaluate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" lean-forward="true" selection-end-line="44" selection-end-column="21" />
+        <state relative-caret-position="275">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="101" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1533301899715" expanded="true" signature="108:952" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image2image/preprocessing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="45" column="35" lean-forward="true" selection-start-line="45" selection-start-column="35" selection-end-line="45" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1533368887271" expanded="true" signature="661:684" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/image2image/exp_execute.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="381" selection-start-line="2" selection-start-column="381" selection-end-line="2" selection-end-column="381" />
+        <state relative-caret-position="282">
+          <caret line="29" selection-start-line="29" selection-end-line="29" selection-end-column="286" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/image2image/image2image.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="199" column="31" lean-forward="true" selection-start-line="199" selection-start-column="31" selection-end-line="199" selection-end-column="31" />
+        <state relative-caret-position="244">
+          <caret line="94" column="82" lean-forward="true" selection-start-line="94" selection-start-column="82" selection-end-line="94" selection-end-column="96" />
           <folding>
             <element signature="e#89#99#0" expanded="true" />
+            <element signature="e#4512#4910#0" />
           </folding>
         </state>
       </provider>

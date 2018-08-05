@@ -10,7 +10,7 @@ if __name__ == '__main__':
     random.seed(320)
 
     data_path = '/Users/yakirgorski/Documents/projects/TGS_salt/Data/all/train/'
-    out_path = '/Users/yakirgorski/Documents/projects/TGS_salt/Data/processed/'
+    out_path = '/Users/yakirgorski/Documents/projects/TGS_salt/Data/processed_aug/'
 
     set_names = ['train', 'validation']
     files = [os.path.basename(f) for f in glob.glob('/Users/yakirgorski/Documents/projects/TGS_salt/Data/all/train/images/*')]
@@ -18,6 +18,8 @@ if __name__ == '__main__':
     random.shuffle(files)
     files = [files[: train_size], files[train_size:]]
 
+    def no_op(a):
+        return a
 
     for set_name, set_files in zip(set_names, files):
 
@@ -34,13 +36,24 @@ if __name__ == '__main__':
             assert set(np.unique(mask)) <= set([0, 65535])
             assert np.all(image[:, :, 0] == image[:, :, 1]) and np.all(image[:, :, 0] == image[:, :, 2])
 
-            mask[mask == 65535] = 255
+            mask[mask == 65535] = 1
             image = image[:, :, 0]
 
             # TODO: depracated
-            image = imresize(image, (128, 128), interp='bilinear')
-            mask = imresize(mask, (128,128), interp='nearest')
+            image = imresize(image, (160, 160), interp='bilinear')
+            mask = imresize(mask, (160,160), interp='nearest')
 
-            out = np.concatenate([image, mask], axis=1).astype(np.uint8)
+            if set_name == 'train':
+                counter = 0
+                for fliplr in [np.fliplr, no_op]:
+                    for flipud in [np.flipud, no_op]:
+                        for rot90 in [np.rot90, no_op]:
 
-            imageio.imsave(os.path.join(out_path, set_name, file), out)
+                            out = np.concatenate([fliplr(flipud(rot90(image))), fliplr(flipud(rot90(mask)))], axis=1).astype(np.uint8)
+
+                            imageio.imsave(os.path.join(out_path, set_name,f'{counter}_{file}'), out)
+                            counter += 1
+            else:
+                out = np.concatenate([image, mask], axis=1).astype(np.uint8)
+
+                imageio.imsave(os.path.join(out_path, set_name, file), out)

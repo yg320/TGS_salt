@@ -32,7 +32,7 @@ BATCH = 1
 IN_CH = 1
 OUT_CH = 1
 LAMBDA = 100
-NF = 16  # number of filter
+NF = 64  # number of filter
 
 
 def BNLReLU(x, name=None):
@@ -64,9 +64,9 @@ class Model(ModelDesc):
     def image2image(self, imgs):
         # imgs: input: 256x256xch
         # U-Net structure, it's slightly different from the original on the location of relu/lrelu
+
         with argscope(BatchNorm, training=True), \
                 argscope(Dropout, is_training=True):
-            # always use local stat for BN, and apply dropout even in testing
             with argscope(Conv2D, kernel_size=4, strides=2, activation=BNLReLU):
                 e1 = Conv2D('conv1', imgs, NF, activation=tf.nn.leaky_relu)
                 e2 = Conv2D('conv2', e1, NF * 2)
@@ -92,26 +92,33 @@ class Model(ModelDesc):
                         .ConcatWith(e2, 3)
                         .Conv2DTranspose('deconv7', NF * 1)
                         .ConcatWith(e1, 3)
-                        .Conv2DTranspose('deconv8', OUT_CH, activation=tf.tanh)())
+                        .Conv2DTranspose('deconv8', 2, activation=tf.identity)())  # TODO: clean
 
     def build_graph(self, input, output):
-        input, output = input / 128.0 - 1, output / 128.0 - 1
+
+        input = input / 128.0 - 1
+        output = tf.cast(output / 255.0, tf.int32)
 
         with argscope([Conv2D, Conv2DTranspose], kernel_initializer=tf.truncated_normal_initializer(stddev=0.02)):
             fake_output = self.image2image(input)
+        fake_output = tf.identity(fake_output, name='aaa')
+        #TODO: clean
+        errL1 = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=output[:,:,:,0], logits=fake_output), name='L1_loss')
 
-        errL1 = tf.reduce_mean(tf.abs(fake_output - output), name='L1_loss')
-
+        score = tf.nn.softmax(fake_output)
         add_moving_summary(errL1)
 
-        # tensorboard visualization
-        if IN_CH == 1:
-            input = tf.image.grayscale_to_rgb(input)
-        if OUT_CH == 1:
-            output = tf.image.grayscale_to_rgb(output)
-            fake_output = tf.image.grayscale_to_rgb(fake_output)
+        viz = tf.identity(tf.concat([input, tf.cast(output, tf.float32), score[:,:,:,1:2]], axis=2), name='viz')
 
-        visualize_tensors('input,output,fake', [input, output, fake_output], max_outputs=max(30, BATCH))
+        if False:
+            # tensorboard visualization
+            if IN_CH == 1:
+                input = tf.image.grayscale_to_rgb(input)
+            if OUT_CH == 1:
+                output = tf.image.grayscale_to_rgb(output)
+                fake_output = tf.image.grayscale_to_rgb(fake_output)
+
+            visualize_tensors('input,output,fake', [input, tf.cast(output, tf.float32), fake_output], max_outputs=max(30, BATCH))
 
         self.cost = errL1
 
@@ -141,14 +148,14 @@ def split_input(img):
     return [input, output]
 
 
-def get_data():
-    datadir = args.data
+def get_data(datadir):
+
     imgs = glob.glob(os.path.join(datadir, '*.png'))
     ds = ImageFromFile(imgs, channel=IN_CH, shuffle=True)
 
     ds = MapData(ds, lambda dp: split_input(dp[0]))
-    # augs = [imgaug.Resize(286), imgaug.RandomCrop(256)]
-    # ds = AugmentImageComponents(ds, augs, (0, 1))
+    augs = [imgaug.RandomCrop(128)]
+    ds = AugmentImageComponents(ds, augs, (0, 1))
     ds = BatchData(ds, BATCH)
     ds = PrefetchData(ds, 100, 1)
     return ds
@@ -164,15 +171,16 @@ def sample(datadir, model_path, output_path):
     imgs = glob.glob(os.path.join(datadir, '*.png'))
     ds = ImageFromFile(imgs, channel=IN_CH, shuffle=True)
     ds = MapData(ds, lambda dp: split_input(dp[0]))
-    # ds = AugmentImageComponents(ds, [imgaug.Resize(256)], (0, 1))
-    ds = BatchData(ds, 6)
+    augs = [imgaug.CenterCrop(128)]
+    ds = AugmentImageComponents(ds, augs, (0, 1))
+    ds = BatchData(ds, BATCH)
 
     pred = SimpleDatasetPredictor(pred, ds)
 
     counter = 0
     for o in pred.get_result():
         for im in o[0]:
-            np.save(os.path.join(output_path, f'{counter}.npy'), im[:,:,0])
+            np.save(os.path.join(output_path, f'{counter}.npy'), im)
             counter += 1
         # o = o[0][:, :, :, ::-1]
         # stack_patches(o, nr_row=3, nr_col=2, viz=True)
@@ -198,23 +206,27 @@ if __name__ == '__main__':
     if args.sample:
         assert args.load
         assert args.output_path
+        os.makedirs(args.output_path)
         sample(args.data, args.load, args.output_path)
     else:
         logger.set_logger_dir(args.logger, action='k')
 
-        data = QueueInput(get_data())
+        data = QueueInput(get_data(datadir = os.path.join(args.data, 'train')))
 
-        config = TrainConfig(
+        config = AutoResumeTrainConfig(
             model=Model(),
             data=data,
             callbacks=[
-                PeriodicTrigger(ModelSaver(), every_k_epochs=3),
+                PeriodicTrigger(ModelSaver(), every_k_epochs=1),
+                PeriodicTrigger(InferenceRunner(get_data(datadir=os.path.join(args.data, 'validation')), [ScalarStats('L1_loss')]), every_k_epochs=1),
                 ScheduledHyperParamSetter('learning_rate', [(200, 1e-4)])
             ],
-            steps_per_epoch=data.size(),
+            steps_per_epoch=data.size() // 8,
             max_epoch=300,
             session_init=SaverRestore(args.load) if args.load else None
         )
+
+
 
         launch_train_with_config(config, SimpleTrainer())
         # SimpleTrainer(data, Model()).train_with_defaults(

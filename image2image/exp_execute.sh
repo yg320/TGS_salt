@@ -27,7 +27,7 @@
 
 
 
-/anaconda3/envs/kaggle_salt/bin/python3.6 /Users/yakirgorski/PycharmProjects/TGS_salt/image2image/image2image.py          --data /Users/yakirgorski/Documents/projects/TGS_salt/Data/processed_aug/ --logger /Users/yakirgorski/Documents/projects/TGS_salt/Experiments/5/checkpoint --batch 8
+/home/paperspace/anaconda3/bin/python3.6 /home/paperspace/projects/TGS_salt/image2image/image2image.py   --data /home/paperspace/Data/TGS_salt/processed_aug/ --logger /home/paperspace/Experiments/0/checkpoint --batch 8
 /anaconda3/envs/kaggle_salt/bin/python3.6 /Users/yakirgorski/PycharmProjects/TGS_salt/image2image/image2image.py --sample --data /Users/yakirgorski/Documents/projects/TGS_salt/Data/processed_aug/validation --load   /Users/yakirgorski/Documents/projects/TGS_salt/Experiments/4/checkpoint/model-419200.data-00000-of-00001 --output_path /Users/yakirgorski/Documents/projects/TGS_salt/Experiments/4/sample/validation
 
 

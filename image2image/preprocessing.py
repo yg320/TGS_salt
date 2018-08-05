@@ -10,11 +10,16 @@ import csv
 if __name__ == '__main__':
     random.seed(320)
 
+<<<<<<< HEAD
     data_path = '/Users/yakirgorski/Documents/projects/TGS_salt/Data/all/train/'
     out_path = '/Users/yakirgorski/Documents/projects/TGS_salt/Data/processed_aug_with_depth/'
+=======
+    data_path = '/home/paperspace/Data/TGS_salt/all/train/'
+    out_path = '/home/paperspace/Data/TGS_salt/processed_aug/'
+>>>>>>> 106861e141ee543234207d891327d06dc5b004a1
 
     set_names = ['train', 'validation']
-    files = [os.path.basename(f) for f in glob.glob('/Users/yakirgorski/Documents/projects/TGS_salt/Data/all/train/images/*')]
+    files = [os.path.basename(f) for f in glob.glob(os.path.join(data_path, 'images/*'))]
     train_size = int(0.8 * len(files))
     random.shuffle(files)
     files = [files[: train_size], files[train_size:]]

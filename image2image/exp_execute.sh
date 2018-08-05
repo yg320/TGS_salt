@@ -14,7 +14,7 @@
 
 
 
-/anaconda3/envs/kaggle_salt/bin/python3.6 /Users/yakirgorski/PycharmProjects/TGS_salt/image2image/image2image.py --sample --data /Users/yakirgorski/Documents/projects/TGS_salt/Data/processed/train --load   /Users/yakirgorski/Documents/projects/TGS_salt/Experiments/3/checkpoint/model-9600.data-00000-of-00001 --output_path /Users/yakirgorski/Documents/projects/TGS_salt/Experiments/3/sample/train
+/anaconda3/envs/kaggle_salt/bin/python3.6 /Users/yakirgorski/PycharmProjects/TGS_salt/image2image/image2image.py --sample --data /Users/yakirgorski/Documents/projects/TGS_salt/Data/processed/train --load   /Users/yakirgorski/Documents/projects/TGS_salt/Experiments/5/checkpoint/model-9600.data-00000-of-00001 --output_path /Users/yakirgorski/Documents/projects/TGS_salt/Experiments/5/sample/train
 /anaconda3/envs/kaggle_salt/bin/python3.6 /Users/yakirgorski/PycharmProjects/TGS_salt/image2image/image2image.py          --data /Users/yakirgorski/Documents/projects/TGS_salt/Data/processed/train --logger /Users/yakirgorski/Documents/projects/TGS_salt/Experiments/3/checkpoint
 
 

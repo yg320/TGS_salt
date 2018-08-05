@@ -9,8 +9,8 @@ import tensorflow as tf
 import glob
 import os
 import argparse
-
-
+import shutil
+import sys
 from tensorpack import *
 from tensorpack.utils.viz import stack_patches
 from tensorpack.tfutils.summary import add_moving_summary
@@ -58,7 +58,7 @@ def visualize_tensors(name, imgs, scale_func=lambda x: (x + 1.) * 128., max_outp
 class Model(ModelDesc):
     def inputs(self):
         SHAPE = 128
-        return [tf.placeholder(tf.float32, (None, SHAPE, SHAPE, IN_CH), 'input'),
+        return [tf.placeholder(tf.float32, (None, SHAPE, SHAPE, 2), 'input'),
                 tf.placeholder(tf.float32, (None, SHAPE, SHAPE, OUT_CH), 'output')]
 
     def image2image(self, imgs):
@@ -108,7 +108,7 @@ class Model(ModelDesc):
         score = tf.nn.softmax(fake_output)
         add_moving_summary(errL1)
 
-        viz = tf.identity(tf.concat([input, tf.cast(output, tf.float32), score[:,:,:,1:2]], axis=2), name='viz')
+        viz = tf.identity(tf.concat([input[:,:,:,:1], tf.cast(output, tf.float32), score[:,:,:,1:2]], axis=2), name='viz')
 
         if False:
             # tensorboard visualization
@@ -134,9 +134,12 @@ def split_input(img):
     """
     # split the image into left + right pairs
     s = img.shape[0]
-    assert img.shape[1] == 2 * s
-    input, output = img[:, :s, :], img[:, s:, :]
+    assert img.shape[1] == 3 * s
+    input, output, depth = img[:, :s, :], img[:, s:2*s, :], img[:, 2*s:3*s, :]
+    input = np.concatenate([input, depth], axis=2)
+
     if args.mode == 'BtoA':
+        assert False, 'Not supported feature'
         input, output = output, input
 
     if False:
@@ -210,7 +213,7 @@ if __name__ == '__main__':
         sample(args.data, args.load, args.output_path)
     else:
         logger.set_logger_dir(args.logger, action='k')
-
+        shutil.copyfile(sys.argv[0], os.path.join(args.logger, os.path.basename(sys.argv[0])))
         data = QueueInput(get_data(datadir = os.path.join(args.data, 'train')))
 
         config = AutoResumeTrainConfig(

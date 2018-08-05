@@ -9,11 +9,11 @@ from scipy.misc import imresize
 if __name__ == '__main__':
     random.seed(320)
 
-    data_path = '/Users/yakirgorski/Documents/projects/TGS_salt/Data/all/train/'
-    out_path = '/Users/yakirgorski/Documents/projects/TGS_salt/Data/processed_aug/'
+    data_path = '/home/paperspace/Data/TGS_salt/all/train/'
+    out_path = '/home/paperspace/Data/TGS_salt/processed_aug/'
 
     set_names = ['train', 'validation']
-    files = [os.path.basename(f) for f in glob.glob('/Users/yakirgorski/Documents/projects/TGS_salt/Data/all/train/images/*')]
+    files = [os.path.basename(f) for f in glob.glob(os.path.join(data_path, 'images/*'))]
     train_size = int(0.8 * len(files))
     random.shuffle(files)
     files = [files[: train_size], files[train_size:]]
